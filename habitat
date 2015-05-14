@@ -802,7 +802,7 @@ function habitat_main() {
       return_code="1"
     fi
   else
-    habitat_update_plugins "1" "$habitat_plugin_dir" "$plugin_list"
+    #habitat_update_plugins "1" "$habitat_plugin_dir" "$plugin_list"
     habitat_run_plugins "$habitat_plugin_dir" "$habitat_dotfiles_dir" "$plugin_list"
   fi
   habitat_cleanup
