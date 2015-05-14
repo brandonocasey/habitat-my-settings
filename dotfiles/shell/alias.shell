@@ -19,7 +19,7 @@ alias cp='cp -iR'
 # We want free disc space in human readable output, trust me
 alias df='df -h'
 
-" TODO: fix this stuff
+# TODO: fix this stuff
 if [ -z "$(echo "$OPERATING_SYSTEM" | grep -E 'OSX.*')" ]; then
     # Show me all files and info about them
     alias ll='ls -lh --color'
@@ -74,7 +74,7 @@ alias deps_update="composer update;npm update;bower update"
 
 # use rlwrap if we have it
 telnet() {
-    if command -v "rlwrap" 2>&1 1>/dev/null; then
+    if command -v rlwrap 2>&1 1>/dev/null; then
         rlwrap telnet "$@"
     else
         telnet "$@"
@@ -83,7 +83,7 @@ telnet() {
 
 # use multitail if we have it
 tail() {
-    if command -v "multitail" 2>&1 1>/dev/null; then
+    if command -v multitail 2>&1 1>/dev/null; then
         multitail "$@"
     else
         tail -f "$@"
