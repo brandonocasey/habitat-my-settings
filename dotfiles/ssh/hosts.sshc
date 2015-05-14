@@ -1,0 +1,404 @@
+#==========================================================
+# => Production
+#==========================================================
+
+Host noc_server1
+HostName 10.10.100.100
+
+Host noc_server2
+HostName 10.10.0.3
+
+Host prod_kickstart
+HostName 10.10.0.234
+
+Host prod_asterisk
+HostName 10.10.100.12
+
+Host prod_eir_local
+HostName 10.12.92.19
+
+Host prod_eir_central
+HostName 10.12.92.20
+
+Host oracle_server
+HostName 10.13.1.53
+
+# dev code
+Host eir_prod_dev
+HostName 192.168.25.243
+
+# official testing server
+Host eir_prod_lab
+HostName 192.168.25.244
+
+# Sim OTA
+User dpa
+Host gnd_lab_platform
+HostName 10.13.1.54
+
+Host gnd_lab_ota_app
+HostName 10.13.1.116
+
+Host gnd_lab_ota_db
+HostName 10.13.1.117
+
+Host gnd_lab_control_center
+HostName 10.13.1.118
+
+Host gnd_lab_oracle_db
+HostName 10.13.1.53
+
+
+#==========================================================
+# => EIR
+#==========================================================
+
+Host eir_qa
+HostName 192.168.25.172
+
+Host eir_central_db
+HostName 192.168.25.190
+
+Host eir_dev
+HostName 192.168.35.16
+
+#==========================================================
+# => OTA
+#==========================================================
+
+# Manual
+Host ivr_asterisk
+HostName 192.168.25.79
+
+# ptsmart is on a different version than trunk
+Host ota_ptsmart
+HostName 192.168.25.76
+
+# 8 then 1 then dial (972)753-1879
+Host pt_smart_ivr_qa
+HostName 10.12.0.17
+
+# On the production network to talk to a TBa have to log in as root - password
+Host dev_pt_smart_ivr
+HostName 10.12.0.11
+
+Host ota_db
+HostName 192.168.25.21
+
+Host ota_qa
+HostName 192.168.25.144
+
+Host hawkeye_ivr
+HostName 192.168.25.142
+
+Host mark_cc3_ota
+HostName 192.168.25.44
+
+
+# Automated
+Host ota_target
+HostName 192.168.25.211
+
+Host ota_target_el6
+HostName 192.168.25.225
+
+
+# Long Runner
+Host ota_long_el5
+HostName 192.168.25.118
+
+Host ota_long_el6
+HostName 192.168.25.119
+
+
+# Dev
+Host ota_dev
+HostName 192.168.35.11
+
+
+# Hardware
+Host ota_siu_dev
+HostName 192.168.35.101
+
+Host ota_siu_qa
+HostName 192.168.35.59
+
+Host bg_ivr_dev
+HostName 192.168.35.12
+
+#==========================================================
+# => SDD
+#==========================================================
+
+# Manual
+Host sdd_qa
+HostName 192.168.25.63
+
+# Automated
+Host sdd_target
+HostName 192.168.25.62
+
+
+#==========================================================
+# => Macs
+#==========================================================
+
+Host brandons_mac
+HostName 172.20.71.108
+
+
+#==========================================================
+# => Shared Resources
+#==========================================================
+
+# Control Center 2
+Host control_center
+HostName 192.168.25.43
+
+
+# ISI Production
+Host isi_ansi_1
+HostName 192.168.25.15
+
+Host isi_ansi_2
+HostName 192.168.25.7
+
+Host isi_itu_1
+HostName 192.168.25.8
+
+
+# ISI Development
+Host isi_dev
+HostName 192.168.25.216
+
+
+# Auto Doc
+Host auto_doc
+HostName 192.168.25.126
+
+
+# Automated product database
+# DB's
+Host th_ipsmgw_db th_el6_db
+HostName 192.168.25.130
+
+
+# Manual Testing Database
+Host el6_qa_db
+HostName 192.168.25.21
+
+
+# Hubs / Misc
+Host qa_scripts
+HostName 192.168.25.41
+
+Host env_mgr
+HostName 192.168.25.135
+
+Host sandbox
+HostName 192.168.25.199
+
+
+
+#==========================================================
+# => Test Harness
+#==========================================================
+
+Host testharness
+HostName 192.168.25.31
+
+# Testers
+Host bc_testharness
+HostName 192.168.25.250
+
+Host alucillo_tester
+HostName 192.168.25.75
+
+Host clee_tester
+HostName 192.168.25.34
+
+Host rtrinh_tester
+HostName 192.168.25.221
+
+Host arush_tester
+HostName 172.25.50.123
+
+
+
+#==========================================================
+# => IPSMGW
+#==========================================================
+
+# Automated
+Host th_ipsmgw
+HostName 192.168.25.125
+
+# Manual
+Host ipsmgw_qa
+HostName 192.168.25.124
+
+# Development
+Host ipsmgw_autobuild
+HostName 192.168.25.238
+
+Host ipsmgw_dev
+HostName 10.12.92.223
+
+Host ipsmgw_alex
+HostName 192.168.35.90
+
+Host ipsmgw_dev_db
+HostName 10.12.92.224
+
+
+
+#==========================================================
+# => RMS
+#==========================================================
+
+Host rms_target
+HostName 192.168.25.214
+
+# Physical
+Host benchmark_tester
+HostName 10.13.2.31
+
+Host benchmark_target
+HostName 10.13.2.32
+
+Host benchmark_db
+HostName 10.13.2.33
+
+
+#==========================================================
+# => CMAS
+#==========================================================
+
+# CMAS Automated
+Host cmas_target_el6
+HostName 192.168.25.49
+
+
+# Test harness cmas_app and db
+Host cmas_target cmas_target_el5
+HostName 192.168.25.17
+
+
+# CMAS Manual
+Host cmas_qa_6
+HostName 192.168.25.19
+
+Host cmas_qa_5 cmas_qa
+HostName 192.168.25.18
+
+Host bsa_ingestor
+HostName 192.168.25.208
+
+
+# CMAS DEV
+Host cmas_dev_6
+HostName 192.168.35.37
+
+Host cmas_dev_5
+HostName 192.168.35.38
+
+Host cmas_dev_6_32
+HostName 192.168.35.42
+
+
+# CMAS Hardware
+# shared with dev
+Host cmas_siu_qa
+HostName 192.168.25.158
+
+Host cmas_tb_qa
+HostName 192.168.25.253
+
+#==========================================================
+# => SIM OTA
+#==========================================================
+
+Host sim_ota_dev
+HostName 192.168.35.161
+
+Host sim_ota_qa
+HostName 192.168.25.161
+
+Host sim_ota_target
+HostName 192.168.25.162
+
+
+#==========================================================
+# => SMSC
+#==========================================================
+
+# Automated
+Host clee_smsc
+HostName 192.168.25.38
+
+
+#==========================================================
+# => ACS
+#==========================================================
+
+# Automated
+Host clee_acs
+HostName 192.168.25.234
+
+Host clee_acs_db
+HostName 192.168.25.236
+
+#==========================================================
+# => DEVs
+#==========================================================
+
+Host alex_dev
+HostName 192.168.35.90
+
+#==========================================================
+# => Build System
+#==========================================================
+
+Host annex_kickstart
+HostName 192.168.30.10
+
+Host build_server
+HostName 192.168.30.11
+
+Host koji_server
+HostName 192.168.30.15
+
+Host mash_server
+HostName 192.168.30.149
+
+
+# Builders
+Host builder1.iot1.com
+HostName 192.168.30.12
+
+Host builder1
+HostName 192.168.30.12
+
+Host builder2.iot1.com
+HostName 192.168.30.13
+
+Host builder2
+HostName 192.168.30.13
+
+Host builder3.iot1.com
+HostName 192.168.30.17
+
+Host builder3
+HostName 192.168.30.17
+
+Host builder4.iot1.com
+HostName 192.168.30.8
+
+Host builder4
+HostName 192.168.30.8
+
+Host builder5.iot1.com
+HostName 192.168.30.9
+
+Host builder5
+HostName 192.168.30.9

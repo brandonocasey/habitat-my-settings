@@ -1,0 +1,44 @@
+# Include the default inputrc
+$include /etc/inputrc
+# Be more intelligent when autocompleting by also looking at the text after
+# # the cursor. For example, when the current line is "cd ~/src/mozil", and
+# # the cursor is on the "z", pressing Tab will not autocomplete it to "cd
+# # ~/src/mozillail", but to "cd ~/src/mozilla". (This is supported by the
+# # Readline used by Bash 4.)
+set skip-completed-text on
+
+# This one is insanely useful when you have a folder with lots of similarly
+# named files and you are not sure how far the completion has gone when you
+# press TAB. The first part that has been completed will be replaced by "...",
+# and it is simple to see what you need to type to finish the completion.
+set completion-prefix-display-length 2
+
+# Move through tab completions
+Control-j: menu-complete
+Control-k: menu-complete-backward
+
+# Allow UTF-8 input and output, instead of showing stuff like $'\0123\0456'
+set input-meta on
+set output-meta on
+set convert-meta off
+
+
+# If there are more than 200 possible completions for a word, ask to show them all
+set completion-query-items 200
+
+
+# Show extra file information when completing, like `ls -F` does
+set visible-stats on
+
+# Only hit tab once to show completions
+set show-all-if-ambiguous on
+
+# Fix home and End
+"\e[1~": beginning-of-line
+"\e[4~": end-of-line
+"\e[7~": beginning-of-line
+"\e[8~": end-of-line
+"\eOH": beginning-of-line
+"\eOF": end-of-line
+"\e[H": beginning-of-line
+"\e[F": end-of-line

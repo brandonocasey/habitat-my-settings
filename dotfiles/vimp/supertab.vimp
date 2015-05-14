@@ -1,0 +1,5 @@
+" Better tab completion
+Plugin 'ervandew/supertab'
+
+" Match from the top
+let g:SuperTabDefaultCompletionType = "<c-n>"

@@ -1,0 +1,38 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Tabs & Paste
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Set default tab width to 4 spaces
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+
+" Expand tabs to spaces
+"set expandtab
+
+" Auto indent in a smart way so that copy paste is not broken
+set autoindent
+
+" Use shiftwidth and tabstop smartly
+set smarttab
+
+" Use systems copy paste function with yank and paste
+set clipboard=unnamed
+
+" Vim Clipboard to 1000kb and 10000 line limit
+set viminfo='20,<10000,s1000,h
+
+" Automatic Paste mode when pasting to terminal with smart indent
+let &t_SI .= "\<Esc>[?2004h"
+let &t_EI .= "\<Esc>[?2004l"
+
+
+function! XTermPasteBegin()
+  set pastetoggle=<Esc>[201~
+  set paste
+  return ""
+endfunction
+
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+
+

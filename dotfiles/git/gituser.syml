@@ -1,0 +1,5 @@
+[user]
+    name = Brandon O'Casey
+    email = brandonocasey@gmail.com
+[credential]
+    helper = osxkeychain

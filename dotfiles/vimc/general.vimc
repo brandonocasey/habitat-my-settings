@@ -1,0 +1,33 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Sets how many lines of history VIM has to remember
+set history=1000
+
+" Set to auto read when a file is changed from the outside
+set autoread
+
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = ","
+let g:mapleader = ","
+
+" reload vim options when vimrc changes
+augroup myvimrc
+    au!
+    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC |endif
+augroup END
+
+" Default file encoding
+set encoding=utf-8
+set termencoding=utf-8
+
+" More frequent updates for, e.g. signs.
+set updatetime=750
+
+" Use Unix as the standard file type
+set ffs=unix,dos,mac
+
+" make backspace work like most other apps
+set backspace=indent,eol,start

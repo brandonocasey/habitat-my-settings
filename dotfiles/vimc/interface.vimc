@@ -1,0 +1,89 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => VIM user interface
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" TODO: KEYBIND THIS
+" Show trailing whitespace and all tabs
+"set list listchars=trail:·
+"command ShowTabs :set list listchars=tab:→\ ,trail:·
+
+" Start scrolling when we're 10 lines away from margins
+set scrolloff=10
+
+" Turn on the WiLd menu
+set wildmenu
+
+" Ignore compiled files
+set wildignore=*.o,*~,*.pyc
+
+" Give a list for tab completion
+set wildmode=list:longest
+
+
+" View line numbers etc in the bottom right
+set ruler
+
+" Show matching brackets when text indicator is over them
+set showmatch
+
+" For regular expressions turn magic on making vim more like grep
+set magic
+
+" Ignore case when searching
+set ignorecase
+
+" When searching try to be smart about cases
+" capital matches capital only, lower case matches all
+set smartcase
+
+" Highlight search terms...
+set hlsearch
+set incsearch " ...dynamically as they are typed.
+
+" Don't redraw while executing macros (good performance config)
+set lazyredraw
+
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+" Configure backspace so it acts as it should act
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+
+" Never assume a file has mode lines, causes vim to freak out if the file
+" containes ex: command because vim thinks there is a command in the file
+set modelines=0
+
+" Reload instead of scrolling when more than 3 lines to be scrolled
+set ttyscroll=10
+
+" Use the new regex engine always
+if v:version > 740
+    set re=1
+endif
+
+" Dont do syntax highlighting for big lines, makes vim slow, not slow enough
+" to warrent me thinks
+" set synmaxcol=200
+
+" Slightly highlight the line the cursor is on
+" TODO: Find out why this lags everything
+"set cursorline
+
+" Title of file in bar at the top
+set title
+
+" Allow sytax highlighting in vim
+syntax enable
+
+" Better redrawing for large files
+set ttyfast
+
+" Delete comment character when joining commented lines
+if v:version > 703 || v:version == 703 && has("patch541")
+      set formatoptions+=j
+endif
+

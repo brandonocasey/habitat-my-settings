@@ -1,0 +1,86 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Key Mapping
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" The first line sets a mapping so that pressing F2 in normal mode will invert the 'paste' option
+" and will then show the value of that option.
+" The second line allows you to press F2 when in insert mode, to toggle 'paste' on and off.
+" The third line enables displaying whether 'paste' is turned on in insert mode.
+nnoremap <F2> :set invpaste paste?<CR>
+
+set pastetoggle=<F2>
+
+" Actually Delete with the leader Command
+nnoremap <leader>d "_d
+vnoremap <leader>p "_dP
+
+" Write if not sudo
+nnoremap <leader>w :w !sudo tee % > /dev/null<CR><CR>
+
+" Quit already
+nnoremap <leader>q :q!<CR>
+
+" TODO: KEYBIND Indent fix entire file v,  Shift+g, =
+
+" shift tab to unindent
+imap <S-Tab> <C-d>
+nmap <S-Tab> <<_
+vmap <S-Tab> <<
+
+" tab to indent in
+nmap <Tab> >>_
+vmap <Tab> >>
+
+
+" Smoother scrolling with control-f etc each line takes 20 mili seconds
+let vim_smooth_scroll=expand('~/.vim/bundle/vim-smooth-scroll/README.md')
+if filereadable(vim_smooth_scroll)
+    noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 20, 2)<CR>
+    noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 20, 2)<CR>
+    noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 20, 4)<CR>
+    noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 20, 4)<CR>
+endif
+
+" disable help and toggle line numbers instead
+nnoremap <F1> :set invnumber<CR>
+
+" No ex mode because who cares
+nnoremap Q <nop>
+
+" No man pages because I don't write C or many shell scripts
+nnoremap K <nop>
+
+" Treat long lines as break lines (useful when moving around in them)
+map j gj
+map k gk
+map <silent> <Up> gk
+imap <silent> <Up> <C-o>gk
+map <silent> <Down> gj
+imap <silent> <Down> <C-o>gj
+map <silent> <home> g<home>
+imap <silent> <home> <C-o>g<home>
+map <silent> <End> g<End>
+imap <silent> <End> <C-o>g<End>
+
+" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
+map <space> /
+map <c-space> ?
+
+" Correct curly brace tabbing when creating a new function
+inoremap {<CR> {<CR>}<C-o>O
+
+" Pressing ,ss will toggle and untoggle spell checking
+map <leader>ss :setlocal spell!<cr>
+
+" Shortcuts using <leader>
+map <leader>sn ]s
+map <leader>sp [s
+map <leader>sa zg
+map <leader>s? z=
+
+" Map the home key to go to the beginning of a line, and
+" if pressed again it will go to the start of the line
+noremap <expr> <silent> <Home> col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
+imap <silent> <Home> <C-O><Home>
+
+" TODO: Map Control enter to insert a new comment line in insert mode

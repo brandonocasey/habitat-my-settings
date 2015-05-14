@@ -1,0 +1,43 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => File Fixes
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+
+function! DetectSyntax()
+	if did_filetype()
+		let current_file_type = &filetype
+		" File types to ignore
+		if current_file_type !~ '[tads]'
+			return
+		endif
+	endif
+    if getline(1) =~ '^#!(/usr/bin/env\s\+bash|/bin/sh|/bin/bash)'
+        :set syntax=sh
+		let g:is_bash=1
+    elseif getline(1) =~ '^#!(/usr/bin/env\s\+perl|/usr/bin/perl)'
+        :set syntax=perl
+    endif
+endfunction
+
+if has("autocmd")
+	augroup syntax_augroup
+		" wipe previous implementation of this autocmd on load
+		autocmd!
+		" Dont do comments on a new line
+		autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+		" Color Log Files if you can
+		autocmd BufNewFile,BufReadPost *messages* :set filetype=messages
+		autocmd BufNewFile,BufReadPost *log* :set filetype=messages
+
+		" Treat text files like every other file when copy pasting into them
+		autocmd BufRead,BufNewFile *.txt,*.tex set wrap linebreak nolist textwidth=0 wrapmargin=0
+
+		autocmd BufNewFile,BufRead *.bash set syntax=sh
+		" cursorline/cursor column slow down ruby :(
+		autocmd BufNewFile,BufRead *.vimc set syntax=vim
+		autocmd BufNewFile,BufRead *.rb   set syntax=ruby nocursorline nocursorcolumn
+		autocmd BufNewFile,BufRead,BufWrite * call DetectSyntax()
+	augroup END
+endif
+

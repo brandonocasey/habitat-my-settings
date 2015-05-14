@@ -1,0 +1,2 @@
+" When opening a new file with a code extension it will be started for you
+Plugin 'aperezdc/vim-template'

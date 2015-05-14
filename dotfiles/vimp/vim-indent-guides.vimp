@@ -1,0 +1,14 @@
+" Indent Guidelines
+" TODO: Reload if indent changes
+Plugin 'nathanaelkane/vim-indent-guides'
+
+
+" No I dont want crazy default indent guide colors
+let g:indent_guides_auto_colors = 0
+
+" We always want indent guides
+let g:indent_guides_enable_on_vim_startup=1
+
+" Indent guidelines color
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=black ctermbg=233
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=darkgrey ctermbg=234

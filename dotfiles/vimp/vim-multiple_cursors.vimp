@@ -1,0 +1,4 @@
+" hit control-n to add another cursor on a similar line
+Plugin 'kristijanhusak/vim-multiple-cursors'
+
+let g:multi_cursor_normal_maps = {'d':1, 'y':1, 'p':1}

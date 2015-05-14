@@ -1,0 +1,2 @@
+" Stop Control-F etc from disorienting you and losing your place
+Plugin 'terryma/vim-smooth-scroll'

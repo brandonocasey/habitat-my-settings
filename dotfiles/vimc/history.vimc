@@ -1,0 +1,75 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => History & Save
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Return to line that you were previously on in vim
+if has("autocmd")
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
+" Allow buffer in the background
+set hidden
+
+" Reuse open buffers and tabs
+set switchbuf=useopen,usetab
+
+" Drop unused spaces at the end of lines
+set shiftround
+
+" Save vim history
+set viminfo+=h
+
+" Don't Save Blank vindows
+set ssop-=blank
+
+" Don't save options set in a file
+set ssop-=options
+
+" Don't store code folds
+set ssop-=folds
+
+" Dont make crazy swp files and backups everywhere
+set nowritebackup
+set noswapfile
+set nobackup
+
+" Don't Make backups in tmp directories
+set backupskip=/tmp*,/private/tmp/*
+
+" Persistent undo if available
+if has('persistent_undo')
+   silent !mkdir -p ~/.vim/undodir
+   set undofile
+   set undodir=/home/bcasey/.vim/undodir
+endif
+
+" When editing a file, always jump to the last known cursor position.
+" Don't do it when the position is invalid or when inside an event handler
+" (happens when dropping a file on gvim).
+
+" TODO: KEYBIND removal of tabs, or find out which to use
+" From http://vimcasts.org/episodes/tidying-whitespace/
+" Preserves/Saves the state, executes a command, and returns to the saved state
+" Modified from http://vimbits.com/bits/231
+" Remove trailing whitespace on save
+" Change tabs to spaces on save
+function! Preserve(command)
+
+    retab
+    " Save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    execute a:command
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
+" Execute clear whitespace/convert tabs on save
+augroup history_clear_whitespace
+	autocmd!
+	autocmd BufWritePre * :call Preserve("%s/\\s\\+$//e")
+augroup END
+
