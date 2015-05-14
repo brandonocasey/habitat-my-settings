@@ -33,7 +33,7 @@ if has("autocmd")
 		" Treat text files like every other file when copy pasting into them
 		autocmd BufRead,BufNewFile *.txt,*.tex set wrap linebreak nolist textwidth=0 wrapmargin=0
 
-		autocmd BufNewFile,BufRead *.bash set syntax=sh
+		autocmd BufNewFile,BufRead *.shell set syntax=sh let g:is_bash=1
 		" cursorline/cursor column slow down ruby :(
 		autocmd BufNewFile,BufRead *.vimc,*.vimp set syntax=vim
 		autocmd BufNewFile,BufRead *.rb   set syntax=ruby nocursorline nocursorcolumn
