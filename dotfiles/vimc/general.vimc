@@ -31,3 +31,6 @@ set ffs=unix,dos,mac
 
 " make backspace work like most other apps
 set backspace=indent,eol,start
+
+" dont search all included files for tab completions
+" set complete-=i

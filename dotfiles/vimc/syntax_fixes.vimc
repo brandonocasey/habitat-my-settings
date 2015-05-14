@@ -35,7 +35,7 @@ if has("autocmd")
 
 		autocmd BufNewFile,BufRead *.bash set syntax=sh
 		" cursorline/cursor column slow down ruby :(
-		autocmd BufNewFile,BufRead *.vimc set syntax=vim
+		autocmd BufNewFile,BufRead *.vimc,*.vimp set syntax=vim
 		autocmd BufNewFile,BufRead *.rb   set syntax=ruby nocursorline nocursorcolumn
 		autocmd BufNewFile,BufRead,BufWrite * call DetectSyntax()
 	augroup END
