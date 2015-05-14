@@ -5,7 +5,7 @@
 # be helpful should we need them in later scripts
 #==============================================================
 
-if ! is_installed "dircolors"; then
+if command -v "dircolors" 2>&1 >/dev/null; then
     # Colors on Mac
     export LSCOLORS=GxFxCxDxBxegedabagaced
 else

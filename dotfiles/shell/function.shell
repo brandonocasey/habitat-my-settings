@@ -356,7 +356,7 @@ watch_process() {
 
 
 m_valgrind() {
-    if ! is_installed "valgrind"; then
+    if command -v "valgrind" 2>&1 >/dev/null; then
         echo "valgrind is not installed"
     fi
 
@@ -377,7 +377,7 @@ _bin_cmd() {
     init_scripts="/etc/init.d/"
     type_cmd="$1"
     shift
-    if is_installed "service"; then
+    if command -v "service" 2>&1 >/dev/null; then
         run_cmd="sudo service "
     else
         run_cmd="sudo $init_scripts"
