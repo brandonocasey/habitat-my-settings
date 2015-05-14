@@ -3,6 +3,15 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
+function! SetSyntax(name)
+	if a:name == 'bash'
+		:set syntax=sh
+		let g:is_bash=1
+	elseif a:name == 'perl'
+        :set syntax=perl
+	endif
+endfunction
+
 
 function! DetectSyntax()
 	if did_filetype()
@@ -13,10 +22,9 @@ function! DetectSyntax()
 		endif
 	endif
     if getline(1) =~ '^#!(/usr/bin/env\s\+bash|/bin/sh|/bin/bash)'
-        :set syntax=sh
-		let g:is_bash=1
+		SetSyntax('bash')
     elseif getline(1) =~ '^#!(/usr/bin/env\s\+perl|/usr/bin/perl)'
-        :set syntax=perl
+		SetSyntax('perl')
     endif
 endfunction
 
@@ -33,7 +41,7 @@ if has("autocmd")
 		" Treat text files like every other file when copy pasting into them
 		autocmd BufRead,BufNewFile *.txt,*.tex set wrap linebreak nolist textwidth=0 wrapmargin=0
 
-		autocmd BufNewFile,BufRead *.shell set syntax=sh let g:is_bash=1
+		autocmd BufNewFile,BufRead *.shell call SetSyntax('bash')
 		" cursorline/cursor column slow down ruby :(
 		autocmd BufNewFile,BufRead *.vimc,*.vimp set syntax=vim
 		autocmd BufNewFile,BufRead *.rb   set syntax=ruby nocursorline nocursorcolumn
