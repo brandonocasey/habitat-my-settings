@@ -2,3 +2,39 @@
 " => Functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+
+function! FixSpace(width)
+	" Backup the current position
+	let p = getpos(".")
+	" Set default tab width to 4 spaces
+	let &tabstop = a:width
+	let &shiftwidth = a:width
+	let &softtabstop = a:width
+
+	set expandtab
+    retab
+	normal! gg=G
+
+	" Set the current position to the backup
+	call setpos(".",p)
+
+endfunction
+command! -nargs=1 FixSpace :call FixSpace(<q-args>)
+
+function! FixTab(width)
+	" Backup the current position
+	let p = getpos(".")
+	" Set default tab width to 4 spaces
+	let &tabstop = a:width
+	let &shiftwidth = a:width
+	let &softtabstop = a:width
+
+	set noexpandtab
+    retab
+	normal! gg=G
+
+	" Set the current position to the backup
+	call setpos(".",p)
+
+endfunction
+command! -nargs=1 FixTab :call FixTab(<q-args>)
