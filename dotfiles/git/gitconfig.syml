@@ -29,3 +29,6 @@
 [include]
     path = .gituser
     path = .gitpush
+[user]
+	name = brandonocasey
+	email = brandonocasey@gmail.com

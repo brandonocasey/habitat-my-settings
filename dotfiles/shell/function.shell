@@ -8,9 +8,10 @@
 
 mrt_vagrant_fix() {
     local folder="$(find /vagrant -name .meteor)"
-    rm -rf "$folder"
+    local db_folder="$(find "$folder" -name local)"
+    rm -rf "$db_folder"
     mkdir ~/db/
-    ln -s ~/db/ "$folder"
+    ln -s ~/db/ "$db_folder"
 }
 
 big_files() {
