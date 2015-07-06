@@ -6,6 +6,12 @@
 # yourself repeating all the time
 #==============================================================
 
+mrt_vagrant_fix() {
+    local folder="$(find /vagrant -name .meteor)"
+    rm -rf "$folder"
+    mkdir ~/db/
+    ln -s ~/db/ "$folder"
+}
 
 big_files() {
     local folder="."
