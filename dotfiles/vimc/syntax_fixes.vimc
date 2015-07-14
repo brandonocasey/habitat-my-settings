@@ -3,49 +3,62 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-function! SetSyntax(name)
-	if a:name == 'bash'
-		:set syntax=sh
-		let g:is_bash=1
-	elseif a:name == 'perl'
-        :set syntax=perl
-	endif
+" Set the syntax given the binary name that executes that file
+function! SetSyntax(binaryName)
+    if empty(a:binaryName)
+        return
+    endif
+    let binarySyntax=a:binaryName
+    " Correct binary names here, and add specific settings here
+    if a:binaryName == "node"
+        let binarySyntax="javascript"
+    elseif a:binaryName == "bash"
+        let g:is_bash=1
+        let binarySyntax="sh"
+    endif
+    execute "set filetype=" . binarySyntax
+	echo binarySyntax
 endfunction
 
 
+" Grab the binary name from the #! and pass it to SetSyntax
 function! DetectSyntax()
-	if did_filetype()
-		let current_file_type = &filetype
-		" File types to ignore
-		if current_file_type !~ '[tads]'
-			return
-		endif
-	endif
-    if getline(1) =~ '^#!(/usr/bin/env\s\+bash|/bin/sh|/bin/bash)'
-		SetSyntax('bash')
-    elseif getline(1) =~ '^#!(/usr/bin/env\s\+perl|/usr/bin/perl)'
-		SetSyntax('perl')
+    if did_filetype()
+        let current_file_type = &filetype
+        " File types to ignore
+        if current_file_type !~ '[tads]'
+            return
+        endif
     endif
+    let binary = ""
+    let thing = matchlist(getline(nextnonblank(1)), '^#!.*/bin/\(env\s\+\)\?\(\w\+\)')
+    if !empty(thing)
+        let thing = reverse(thing)
+        let i = 0
+        while empty(binary) && i < len(thing)
+            if !empty(thing[i])
+                let binary = thing[i]
+            endif
+            let i = i + 1
+        endwhile
+    endif
+
+    call SetSyntax(binary)
 endfunction
 
 if has("autocmd")
-	augroup syntax_augroup
-		" wipe previous implementation of this autocmd on load
-		autocmd!
-		" Dont do comments on a new line
-		autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-		" Color Log Files if you can
-		autocmd BufNewFile,BufReadPost *messages* :set filetype=messages
-		autocmd BufNewFile,BufReadPost *log* :set filetype=messages
+    " Dont do comments on a new line
+    autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+    " Color Log Files if you can
+    autocmd BufNewFile,BufReadPost *messages* :set filetype=messages
+    autocmd BufNewFile,BufReadPost *log* :set filetype=messages
 
-		" Treat text files like every other file when copy pasting into them
-		autocmd BufRead,BufNewFile *.txt,*.tex set wrap linebreak nolist textwidth=0 wrapmargin=0
+    " Treat text files like every other file when copy pasting into them
+    autocmd BufRead,BufNewFile *.txt,*.tex set wrap linebreak nolist textwidth=0 wrapmargin=0
 
-		autocmd BufNewFile,BufRead *.shell call SetSyntax('bash')
-		" cursorline/cursor column slow down ruby :(
-		autocmd BufNewFile,BufRead *.vimc,*.vimp set syntax=vim
-		autocmd BufNewFile,BufRead *.rb   set syntax=ruby nocursorline nocursorcolumn
-		autocmd BufNewFile,BufRead,BufWrite * call DetectSyntax()
-	augroup END
+    autocmd BufNewFile,BufRead *.shell call SetSyntax('bash')
+    " cursorline/cursor column slow down ruby :(
+    autocmd BufNewFile,BufRead *.vimc,*.vimp set syntax=vim
+    autocmd BufNewFile,BufRead *.rb   set syntax=ruby nocursorline nocursorcolumn
+    autocmd VimEnter,BufWritePost * call DetectSyntax()
 endif
-
