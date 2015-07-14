@@ -17,7 +17,6 @@ function! SetSyntax(binaryName)
         let binarySyntax="sh"
     endif
     execute "set filetype=" . binarySyntax
-	echo binarySyntax
 endfunction
 
 
