@@ -28,8 +28,8 @@ nmap <S-Tab> <<_
 vmap <S-Tab> <<
 
 " tab to indent in
-nmap <Tab> >>_
-vmap <Tab> >>
+nmap <Tab> >>_<esc>
+vmap <Tab> >><esc>
 
 
 " Smoother scrolling with control-f etc each line takes 20 mili seconds
