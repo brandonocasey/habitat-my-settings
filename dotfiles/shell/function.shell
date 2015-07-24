@@ -53,11 +53,6 @@ local_ip() {
 }
 
 
-centos_obsolete_libs() {
-    yum list 2> /dev/null | grep -E -- "^lib" | grep installed | awk -F" " '{print $1}' | sed -e 's_\(.*\)\.i386_\1_' -e 's_[0-9]*\.[0-9]*__' | uniq -c | sed 's_^\s*__' | grep -E -- ^[2-9][2-9]* | sed 's_[0-9]* __'
-}
-
-
 
 #--------------------------------------------------------------
 #
@@ -66,44 +61,52 @@ centos_obsolete_libs() {
 #--------------------------------------------------------------
 
 #
-# gg_replace
+# find_replace
 #
 # Find and replace recursivly from the current directory
 #
-gg_replace() {
+find_replace() {
     if [ "$#" -lt "2" ]; then
         echo '    Usage:'
-        echo '        gg_replace term replacement'
+        echo '        fr term replacement optional:dir'
         echo
         echo '    Example:'
-        echo '        gg_replace cappuchino cappuccino'
+        echo '        fr cappuchino cappuccino .'
         echo
         return 1
     fi
 
-    find=$1; shift
-    replace=$1; shift
+    find="$1"; shift
+    replace="$1"; shift
+    dir="."
+    if [ -n "$1" ]; then
+        dir="$1"; shift
+    fi
+
 
     ORIG_GLOBIGNORE=$GLOBIGNORE
     GLOBIGNORE=*.*
 
-    if [ "$#" = "0" ]; then
-        set -- ' ' "$@"
+    files="$(grep -lR "$find" "$dir")"
+    if [ -z "$files" ]; then
+        echo "Found no files with the term $find"
     fi
+    for file in $(echo "$files"); do
+        if [ -z "$file" ]; then
+            continue
+        fi
 
-    while [ "$#" -gt "0" ]; do
-        for file in `grep -lR "$find" ./`; do
-            echo "Doing find replace in $file"
-            sed -e "s/$find/$replace/g" | tee $file > /dev/null
-        done
-        shift
+        echo "Doing find replace in $file"
+        local contents="$(cat "$file" | sed "s~$find~$replace~")"
+        if [ -z "$contents" ]; then
+            echo "Failed to do find replace on $file, contents ended up null"
+            continue
+        fi
+        echo "$contents" > "$file"
     done
 
     GLOBIGNORE=$ORIG_GLOBIGNORE
 }
-
-
-
 
 
 todos() {
@@ -314,19 +317,6 @@ command_forever() {
     echo "Started $program with log $log and pid $pid, it will be killed upon exit"
 }
 
-getpid() {
-    if [ "$#" -lt "1" ]; then
-        echo '  Usage:'
-        echo '    getpid <search>'
-        echo
-        echo '  Example:'
-        echo "    getpid '/tmp/'"
-        echo
-        return 1
-    fi
-    echo "$(ps aux | grep "$1" | grep -v "grep $1" | awk '{print $2}' | xargs)"
-}
-
 nkill() {
     if [ "$#" -lt "1" ]; then
         echo '  Usage:'
@@ -347,21 +337,6 @@ nkill() {
     read && pkill -f "$@"
 }
 
-
-watch_process() {
-    if [ "$#" -eq "0" ]; then
-        echo 'Usage:'
-        echo '  watch_process name name ...'
-        echo
-        echo 'Example:'
-        echo '  watch_process httpd'
-        echo
-        return 1
-    fi
-    ps aux | grep -v grep | grep --color "$@"
-}
-
-
 m_valgrind() {
     if command -v "valgrind" 2>&1 >/dev/null; then
         echo "valgrind is not installed"
@@ -377,87 +352,6 @@ m_valgrind() {
         return 1
     fi
     sudo valgrind --leak-check=full --show-reachable=yes --log-file="$1" --trace-redir=yes -v "$2"
-}
-
-_bin_cmd() {
-    local run_cmd type_cmd init_scripts
-    init_scripts="/etc/init.d/"
-    type_cmd="$1"
-    shift
-    if command -v "service" 2>&1 >/dev/null; then
-        run_cmd="sudo service "
-    else
-        run_cmd="sudo $init_scripts"
-    fi
-    while [ "$#" -gt "0" ]; do
-        if [ -f "$init_scripts/$1" ]; then
-            $run_cmd "$1" $type_cmd
-        else
-            echo "$1 does not have an init script in $init_scripts"
-        fi
-        shift
-    done
-}
-
-bin_restart() {
-    if [ "$#" -eq "0" ]; then
-        echo 'Usage:'
-        echo '  bin_restart bin bin bin'
-        echo
-        echo 'Example:'
-        echo '  bin_restart httpd rsyslog'
-        echo
-        return 1
-    fi
-    _bin_cmd "restart" "$@"
-}
-
-bin_stop() {
-    if [ "$#" -eq "0" ]; then
-        echo 'Usage:'
-        echo '  bin_stop bin bin bin'
-        echo
-        echo 'Example:'
-        echo '  bin_stop httpd rsyslog'
-        echo
-        return 1
-    fi
-    _bin_cmd "stop" "$@"
-}
-
-bin_status() {
-    if [ "$#" -eq "0" ]; then
-        echo 'Usage:'
-        echo '  bin_status bin bin bin'
-        echo
-        echo 'Example:'
-        echo '  bin_status httpd rsyslog'
-        echo
-        return 1
-    fi
-    _bin_cmd "status" "$@"
-}
-
-
-bin_start() {
-    if [ "$#" -eq "0" ]; then
-        echo 'Usage:'
-        echo '  bin_start bin bin bin'
-        echo
-        echo 'Example:'
-        echo '  bin_start httpd rsyslog'
-        q
-        echo
-        return 1
-    fi
-    _bin_cmd "start" "$@"
-}
-
-_bin_completion() {
-    local cur opts
-    cur="${COMP_WORDS[COMP_CWORD]}"
-    opts=$(cd /etc/init.d/ ; ls -f ./* | sed 's|\./||')
-    COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
 }
 
 tcpd() {
@@ -477,24 +371,5 @@ tcpd() {
     echo "$pcap"
     trap - SIGINT
     trap
-}
-
-
-rewrite_commit_date () {
-    local commit="$1" date_timestamp="$2"
-    local date temp_branch="temp-rebasing-branch"
-    local current_branch="$(git rev-parse --abbrev-ref HEAD)"
-
-    if [[ -z "$commit" ]]; then
-        date="$(date -R)"
-    else
-        date="$(date -R --date "@$date_timestamp")"
-    fi
-
-    git checkout -b "$temp_branch" "$commit"
-    GIT_COMMITTER_DATE="$date" git commit --amend --date "$date"
-    git checkout "$current_branch"
-    git rebase "$commit" --onto "$temp_branch"
-    git branch -d "$temp_branch"
 }
 complete -F _bin_completion bin_restart bin_start bin_status bin_stop
