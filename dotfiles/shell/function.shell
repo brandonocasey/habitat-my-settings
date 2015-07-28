@@ -372,4 +372,30 @@ tcpd() {
     trap - SIGINT
     trap
 }
+
+tcpx() {
+    local pcap="/tmp/${RANDOM}.pcap"
+    if [ -z "$1" ]; then
+        echo "Must define path to transfer file to like:"
+        echo "0.0.0.0:/Users/bcasey/Desktop"
+        return 1
+    fi
+    local cmd="$1"; shift
+    (sudo nohup /usr/sbin/tcpdump -q -s 0 -i any -w "$pcap" 2>&1 > /dev/null &)
+    local pid="$(ps aux | grep $pcap | grep -v grep | awk '{ print $2 }')"
+
+
+    trap "sudo kill -9 '$pid'; echo; echo '$pcap';trap - SIGINT; trap; return 0" SIGINT
+    if [ -z "$pid" ]; then
+        echo 'tcpdump failed to start'
+        return 1
+    fi
+    printf "Hit [Any Key] to kill tcpdump and transfer $pcap to $cmd"
+    read && sudo kill -9 "$pid"
+    sudo chown "$USER":"$USER" "$pcap"
+    trap - SIGINT
+    trap
+    rsync -aP "$pcap" "$cmd"
+}
+
 complete -F _bin_completion bin_restart bin_start bin_status bin_stop
