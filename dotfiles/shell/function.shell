@@ -385,7 +385,7 @@ tcpx() {
     local pid="$(ps aux | grep $pcap | grep -v grep | awk '{ print $2 }')"
 
 
-    trap "sudo kill -9 '$pid'; echo; echo '$pcap';trap - SIGINT; trap; return 0" SIGINT
+    trap "sudo kill '$pid'; echo; echo '$pcap';trap - SIGINT; trap; return 0" SIGINT
     if [ -z "$pid" ]; then
         echo 'tcpdump failed to start'
         return 1
@@ -395,7 +395,10 @@ tcpx() {
     sudo chown "$USER":"$USER" "$pcap"
     trap - SIGINT
     trap
-    rsync -aP "$pcap" "$cmd"
+    rsync -aPz "$pcap" "$cmd"
+    if [ "$?" = "0" ]; then
+        rm -f "$pcap"
+    fi
 }
 
 complete -F _bin_completion bin_restart bin_start bin_status bin_stop
