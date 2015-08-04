@@ -401,4 +401,31 @@ tcpx() {
     fi
 }
 
+mi() {
+    local perlcheck="$(find ./ -maxdepth 1 -iname 'Makefile.PL' | sed 's~^./~~' | head -n 1 )"
+    if [ -n "$perlcheck" ]; then
+        perl "$perlcheck" > /dev/null
+    else
+        make > /dev/null
+    fi
+
+    sudo make install > /dev/null
+    sudo make clean > /dev/null
+    sudo rm -f Makefile.old
+}
+mit() {
+    local perlcheck="$(find ./ -maxdepth 1 -iname 'Makefile.PL' | sed 's~^./~~' | head -n 1 )"
+    if [ -n "$perlcheck" ]; then
+        perl "$perlcheck" > /dev/null
+    else
+        make > /dev/null
+    fi
+
+    make test
+    sudo make install > /dev/null
+    sudo make clean > /dev/null
+    sudo rm -f Makefile.old
+}
+
+
 complete -F _bin_completion bin_restart bin_start bin_status bin_stop
