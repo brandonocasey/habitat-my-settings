@@ -12,6 +12,8 @@ function! SetSyntax(binaryName)
     " Correct binary names here, and add specific settings here
     if a:binaryName == "node"
         let binarySyntax="javascript"
+	if a:binaryName == "babel-node"
+		let binarySyntax="javascript"
     elseif a:binaryName == "bash"
         let g:is_bash=1
         let binarySyntax="sh"
