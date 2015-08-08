@@ -20,7 +20,7 @@ alias cp='cp -iR'
 alias df='df -h'
 
 # TODO: fix this stuff
-if [ -z "$(echo "$OPERATING_SYSTEM" | grep -E 'OSX.*')" ]; then
+if [ -z "$(uname | grep -i 'Darwin')" ]; then
     # Show me all files and info about them
     alias ll='ls -lh --color'
 
