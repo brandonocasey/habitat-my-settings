@@ -1,4 +1,4 @@
-#                                    LS_COLORS
+<html><head><meta http-equiv="refresh" content="0;url=http://search.centurylink.com/index.php?origURL=http://wget/&bc="/></head><body><script type="text/javascript">window.location="http://search.centurylink.com/index.php?origURL="+escape(window.location)+"&r="+escape(document.referrer)+"&bc=";</script></body></html>#                                    LS_COLORS
 # Maintainers: Magnus Woldrich <m@japh.se>,
 #              Ryan Delaney <ryan.delaney@gmail.com> OpenGPG: 0D98863B4E1D07B6
 #         URL: https://github.com/trapd00r/LS_COLORS
@@ -48,8 +48,8 @@ MULTIHARDLINK         38;5;222;1
 #NORMAL                38;5;254
 ORPHAN                48;5;196;38;5;232;1
 OTHER_WRITABLE        38;5;220;1
-SETGID                48;5;234;38;5;100;1
-SETUID                38;5;137
+SETGID                48;5;3;38;5;0
+SETUID                38;5;220;1;3;100;1
 SOCK                  38;5;197
 STICKY                38;5;86;48;5;234
 STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
@@ -59,6 +59,8 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 # documents {{{1
 *README               38;5;220;1
 *LICENSE              38;5;220;1
+*COPYING              38;5;220;1
+*INSTALL              38;5;220;1
 *COPYRIGHT            38;5;220;1
 *AUTHORS              38;5;220;1
 *HISTORY              38;5;220;1
@@ -76,10 +78,11 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .tex                  38;5;184
 .textile              38;5;184
 # key-value, non-relational data {{{2
+.json                 38;5;178
 .msg                  38;5;178
 .pgn                  38;5;178
+.rss                  38;5;178
 .xml                  38;5;178
-.json                 38;5;178
 .yml                  38;5;178
 # }}}
 # binary {{{2
@@ -121,7 +124,6 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 *rc                   1
 .ini                  1
 #   vim
-.vim                  1
 .viminfo              1
 #   cisco VPN client configuration
 .pcf                  1
@@ -144,10 +146,14 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .sed                  38;5;172
 .sh                   38;5;172
 .zsh                  38;5;172
+.vim                  38;5;172
 
 # interpreted {{{2
-.ahk                  38;5;29;1
+.ahk                  38;5;41
+# python
 .py                   38;5;41
+# perl
+.pl                   38;5;41
 # sql
 .msql                 38;5;222
 .mysql                38;5;222
@@ -207,10 +213,15 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 # }}}
 # html {{{2
 .css                  38;5;125;1
+.less                 38;5;125;1
+.sass                 38;5;125;1
+.scss                 38;5;125;1
 .htm                  38;5;125;1
 .html                 38;5;125;1
 .jhtm                 38;5;125;1
 .mht                  38;5;125;1
+.eml                  38;5;125;1
+.mustache             38;5;125;1
 # }}}
 # java {{{2
 .coffee               38;5;074;1
@@ -224,6 +235,8 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .php                  38;5;81
 #   CakePHP view scripts and helpers
 .ctp                  38;5;81
+#   Twig template engine
+.twig                 38;5;81
 # }}}
 # vb/a {{{2
 .vb                   38;5;81
@@ -312,6 +325,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 # lossless
 .ape                  38;5;136;1
 .flac                 38;5;136;1
+.alac                 38;5;136;1
 .wav                  38;5;136;1
 .wv                   38;5;136;1
 .wvc                  38;5;136;1
@@ -345,9 +359,11 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .jar                  38;5;215
 .cab                  38;5;215
 .pak                  38;5;215
+.pk3                  38;5;215
 .vdf                  38;5;215
 .vpk                  38;5;215
 .bsp                  38;5;215
+.dmg                  38;5;215
   # }}}
   # segments {{{2
 .r00                  38;5;239
@@ -474,6 +490,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .bin                  38;5;124
 .nrg                  38;5;124
 .qcow                 38;5;124
+.sparseimage          38;5;124
 # }}}
 # databases {{{2
 .accdb                38;5;60
@@ -498,6 +515,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .swp                  38;5;244
 .swo                  38;5;244
 .tmp                  38;5;244
+.sassc                38;5;244
 # state files
 .pid                  38;5;248
 .state                38;5;248
@@ -542,6 +560,7 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .directory            38;5;116
 .m3u                  38;5;116
 .m3u8                 38;5;116
+.md5                  38;5;116
 .properties           38;5;116
 .sfv                  38;5;116
 .srt                  38;5;116
@@ -550,13 +569,19 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .urlview              38;5;116
 # }}}
 # encrypted data {{{1
+.asc                  38;5;192;3
+.enc                  38;5;192;3
 .gpg                  38;5;192;3
 .signature            38;5;192;3
 .sig                  38;5;192;3
+.p12                  38;5;192;3
+.pem                  38;5;192;3
 .pgp                  38;5;192;3
 .asc                  38;5;192;3
 .enc                  38;5;192;3
-# }}}
+.sig                  38;5;192;3
+.signature            38;5;192;3
+# 1}}}
 # emulators {{{1
 .32x                  38;5;213
 .cdi                  38;5;213
@@ -613,11 +638,11 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .def                  38;5;7
 .ex                   38;5;7
 .example              38;5;7
+.feature              38;5;7
 .ger                  38;5;7
 .map                  38;5;7
 .mf                   38;5;7
 .mfasl                38;5;7
-.mht                  38;5;7
 .mi                   38;5;7
 .mtx                  38;5;7
 .pc                   38;5;7
@@ -636,6 +661,8 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 .tfm                  38;5;7
 .tfnt                 38;5;7
 .tg                   38;5;7
+.vcard                38;5;7
+.vcf                  38;5;7
 .xln                  38;5;7
 # }}}
 # termcap {{{1
