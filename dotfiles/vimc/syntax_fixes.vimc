@@ -61,5 +61,6 @@ if has("autocmd")
     " cursorline/cursor column slow down ruby :(
     autocmd BufNewFile,BufRead *.vimc,*.vimp set syntax=vim
     autocmd BufNewFile,BufRead *.rb   set syntax=ruby nocursorline nocursorcolumn
+    autocmd BufNewFile,BufRead *.coffee   set syntax=coffee nocursorline nocursorcolumn
     autocmd VimEnter,BufWritePost * call DetectSyntax()
 endif
