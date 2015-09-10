@@ -1,3 +1,2 @@
 " <leader>c leader being , will toggle comments
 " comment out stuff
-Plugin 'scrooloose/nerdcommenter'

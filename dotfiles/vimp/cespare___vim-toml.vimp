@@ -1,2 +1,1 @@
-Plugin 'cespare/vim-toml'
 autocmd BufNewFile,BufRead *.toml   set syntax=toml nocursorline nocursorcolumn

@@ -1,2 +1,1 @@
 " Load Syntax highlighting on demand
-Plugin 'sheerun/vim-polyglot'

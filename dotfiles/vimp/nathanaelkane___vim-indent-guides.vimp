@@ -1,6 +1,5 @@
 " Indent Guidelines
 " TODO: Reload if indent changes
-Plugin 'nathanaelkane/vim-indent-guides'
 
 
 " No I dont want crazy default indent guide colors

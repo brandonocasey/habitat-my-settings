@@ -1,3 +1,2 @@
-Plugin 'rust-lang/rust.vim'
 autocmd BufNewFile,BufRead *.rs   set syntax=rust nocursorline nocursorcolumn
 

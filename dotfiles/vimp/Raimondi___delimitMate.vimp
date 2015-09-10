@@ -1,6 +1,5 @@
 " Auto complete (, ", ' with their partner and put you in the center of
 " them to type
-Plugin 'Raimondi/delimitMate'
 
 " Smart indenting for delimate
 " let g:delimitMate_expand_cr = 2

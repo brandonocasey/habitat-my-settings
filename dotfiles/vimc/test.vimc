@@ -1,0 +1,10 @@
+function! TestingThing(path, search)
+  let path = expand(a:path)
+  let files_found = system('find ' . path . ' -not -type l -name  ' . a:search)
+  if empty(files_found)
+    return
+  endif
+  for FILE in split(files_found, '\\n')
+    exe 'source' FILE
+  endfor
+endfunction

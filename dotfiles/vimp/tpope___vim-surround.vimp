@@ -1,5 +1,4 @@
 " example \"Hello World!\"
 " cs"' will change this to 'Hello World!'
 " cs"<q> will change to <q>Hello World!</q>
-Plugin 'tpope/vim-surround'
 

@@ -1,5 +1,4 @@
 " Add tons of colorschemes
-Plugin 'flazz/vim-colorschemes'
 
 " Coloring + stop errors without Vundle
 let vim_colorschemes=expand("~/.vim/bundle/vim-colorschemes/README.md")

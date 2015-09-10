@@ -1,5 +1,4 @@
 " Better directory tree when viming a dir
-Plugin 'scrooloose/nerdtree'
 
 " Nerdtree show me hidden stuff
 let NERDTreeShowHidden=1

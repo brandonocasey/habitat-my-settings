@@ -1,4 +1,2 @@
 " Force Correct Indentation, and auto switch when needed
-Plugin 'brandonocasey/vim-sleuth'
-
 let g:SleuthDefaultWidth = 4
