@@ -644,11 +644,17 @@ function habitat_install_plugins() {
   done
 }
 
+
+##
+# habitat_update_self
+# update the habitat cli
+##
 function habitat_update_self() {
   if [ -z "${1:-}" ]; then
     return 1
   fi
-  local habitat_cli="$1"; shift
+
+  local habitat_cli="${1:-}"; shift
   local branch="master"
   if [ -n "${1:-}" ]; then
     branch="$1"; shift
@@ -659,12 +665,15 @@ function habitat_update_self() {
     return 1
   fi
   if [ "$most_recent" = "$(cat "$habitat_cli")" ]; then
-    echo "Habitat is already up to date"
+	echo "Habitat is already up to date"
+	return 1
   else
+	echo "Habitat has been updated!"
     echo "$most_recent" > "$habitat_cli"
-    echo "Habitat has been updated!"
+	return 0
   fi
 }
+
 ##
 # habitat_update_plugins()
 # update all installed plugins with .git directories
@@ -836,8 +845,14 @@ function habitat_main() {
       return_code="1"
     fi
   else
-    habitat_update_plugins "1" "$habitat_plugin_dir" "$plugin_list"
+	habitat_content="$(cat "$habitat_cli")"
     habitat_update_settings "1" "$habitat_base_dir"
+	# if we updated habitat in our settings re-run
+	if [ "$habitat_content" != "$(cat "$habitat_cli")" ]; then
+	  . "$habitat_cli"
+	  return "$return_code"
+	fi
+    habitat_update_plugins "1" "$habitat_plugin_dir" "$plugin_list"
     habitat_run_plugins "$habitat_plugin_dir" "$habitat_dotfiles_dir" "$plugin_list"
   fi
   habitat_cleanup
@@ -881,7 +896,9 @@ fi
 
 # Set trap so we dont exit our script
 trap '(habitat_trap_error ${LINENO})' ERR SIGTERM SIGINT SIGHUP SIGQUIT
-habitat_main "$habitat_base" "$@"
+if [ -n "$habitat_base" ]; then
+	habitat_main "$habitat_base" "$@"
+fi
 main_code="$?"
 
 # Reset trap to the original values
