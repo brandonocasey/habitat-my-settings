@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+function habitat_brandonocasey_habitat_symlink_home_run() {
+  local current_plugin_dir="$1"; shift
+  local dotfiles_dir="$1"; shift
+  local thing_to_link_to
+  for thing_to_link_to in $(find "$dotfiles_dir" -name '*.syml' -not -type l); do
+    local symlink_file_to_create="$HOME/.$(basename "${thing_to_link_to%.*}")"
+    habitat_debug "Creating symlink file $symlink_file_to_create which links to $thing_to_link_to"
+    if [ -d "$symlink_file_to_create" ]; then
+      rm -rf "$symlink_file_to_create"
+    fi
+    ln -s -f "$thing_to_link_to" "$symlink_file_to_create"
+  done
+}
+
+function habitat_brandonocasey_habitat_symlink_home_options() {
+  local current_plugin_dir="$1"; shift
+  local dotfiles_dir="$1"; shift
+  echo 'brandonocasey/habitat-symlink-home does not support options'
+}

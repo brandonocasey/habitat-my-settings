@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+function habitat_brandonocasey_habitat_source_shell_completion_run() {
+  local current_plugin_dir="$1"; shift
+  local dotfiles_dir="$1"; shift
+  if [ -f "/etc/bash_completion" ]; then
+    habitat_source_file "/etc/bash_completion"
+  fi
+
+  if [ -f "/usr/local/etc/bash_completion" ]; then
+    habitat_source_file "/usr/local/etc/bash_completion"
+  fi
+
+}
+
+function habitat_brandonocasey_habitat_source_shell_completion_options() {
+  local current_plugin_dir="$1"; shift
+  local dotfiles_dir="$1"; shift
+  echo 'brandonocasey/habitat-source-shell-completion does not support options'
+}

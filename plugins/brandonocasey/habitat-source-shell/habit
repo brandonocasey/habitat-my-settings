@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+function habitat_brandonocasey_habitat_source_shell_run() {
+  local current_plugin_dir="$1"; shift
+  local dotfiles_dir="$1"; shift
+  local shell_file_to_source
+  for shell_file_to_source in $(find "$dotfiles_dir" -name '*.shell' -not -type l); do
+    habitat_source_file "$shell_file_to_source"
+  done
+}
+
+function habitat_brandonocasey_habitat_source_shell_options() {
+  local current_plugin_dir="$1"; shift
+  local dotfiles_dir="$1"; shift
+  echo 'brandonocasey/habitat-source-shell does not support options'
+}

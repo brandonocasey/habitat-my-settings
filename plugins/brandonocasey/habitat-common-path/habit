@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+# Only add to the path if its not already there
+function habitat_pathadd() {
+    local binary="$(echo "$1" | sed -e 's~/$~~')"
+    if [ -z "$(echo "$PATH" | grep -E "(^|:)$binary(:|$)")" ]; then
+        if [ "$PATH" == "" ]; then
+            PATH="$binary"
+        else
+            PATH+=":$binary"
+        fi
+    fi
+}
+
+function habitat_pathrm() {
+    local binary="$(echo "$1" | sed -e 's~/$~~')"
+    if [ -n "$(echo "$PATH" | grep -E "(^|:)$binary(:|$)")" ]; then
+        PATH="$(echo "$PATH" | sed -e "s~:$binary$~~")"
+        PATH="$(echo "$PATH" | sed -e "s~$binary:~~")"
+    fi
+}
+function habitat_brandonocasey_habitat_common_path_run() {
+  local current_plugin_dir="$1"; shift
+  local dotfiles_dir="$1"; shift
+  habitat_pathadd "/usr/local/bin"
+  habitat_pathadd "/usr/bin"
+  habitat_pathadd "/bin"
+  habitat_pathadd "/usr/sbin"
+  habitat_pathadd "/sbin"
+  habitat_pathadd "$dotfiles_dir/bin"
+  habitat_pathadd "./node_modules/.bin"
+  habitat_pathadd "./vendor/bin"
+  habitat_pathadd "./bin"
+}
+
+function habitat_brandonocasey_habitat_common_path_options() {
+  local current_plugin_dir="$1"; shift
+  local dotfiles_dir="$1"; shift
+  echo 'brandonocasey/habitat-common-path does not support options'
+}
