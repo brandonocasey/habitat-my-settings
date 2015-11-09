@@ -89,7 +89,7 @@ fi
 
 PS1=""
 # Smiley face
-PS1+="\`if [ \$? = 0 ]; then echo \"\[${LIGHT_BLUE}\]:)\[${RESET}\]\"; else echo \"\[${RED}\]:(\[${RESET}\]\"; fi\`"
+PS1+="\`if [ \$? = 0 ]; then echo '$LIGHT_BLUE:)$RESET'; else echo '$RED:($RESET'; fi\`"
 PS1+="\[${WHITE}\]"             # Start the white color
 PS1+=" \T "                        # Time
 PS1+="\[${COLOR_THREE}\]"       # Start Color Three
