@@ -4,4 +4,6 @@
 let vim_colorschemes=expand("~/.vim/bundle/vim-colorschemes/README.md")
 if filereadable(vim_colorschemes)
 	colorscheme molokai
+	" Make find/replace/confirm more readable"
+	hi Search cterm=NONE ctermfg=grey ctermbg=blue
 endif
