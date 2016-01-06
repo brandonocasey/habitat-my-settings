@@ -1,2 +1,2 @@
 " Force Correct Indentation, and auto switch when needed
-let g:SleuthDefaultWidth = 4
+let g:SleuthDefaultWidth = 2
