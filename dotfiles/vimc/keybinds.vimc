@@ -24,8 +24,8 @@ nnoremap <leader>q :q!<CR>
 
 " shift tab to unindent
 imap <S-Tab> <C-d>
-nmap <S-Tab> <<_
-vmap <S-Tab> <<
+nmap <S-Tab> <<_<esc>
+vmap <S-Tab> <<<esc>
 
 " tab to indent in
 nmap <Tab> >>_<esc>
