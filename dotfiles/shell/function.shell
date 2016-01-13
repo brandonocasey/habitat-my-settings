@@ -97,7 +97,7 @@ find_replace() {
         fi
 
         echo "Doing find replace in $file"
-        local contents="$(cat "$file" | sed "s~$find~$replace~")"
+        local contents="$(cat "$file" | sed "s~$find~$replace~g")"
         if [ -z "$contents" ]; then
             echo "Failed to do find replace on $file, contents ended up null"
             continue
