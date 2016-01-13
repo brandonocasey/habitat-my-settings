@@ -32,3 +32,5 @@
 [user]
 	name = brandonocasey
 	email = brandonocasey@gmail.com
+[push]
+	default = simple
