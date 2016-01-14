@@ -83,7 +83,10 @@ map <leader>s? z=
 noremap <expr> <silent> <Home> col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
 imap <silent> <Home> <C-O><Home>
 
-" allow mouse to scroll
+" turn on mouse support
 set mouse=a
+
+" remap incorrect keybind to correct
+command! Wq wq
 
 " TODO: Map Control enter to insert a new comment line in insert mode
