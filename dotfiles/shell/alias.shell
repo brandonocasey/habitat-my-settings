@@ -72,6 +72,8 @@ alias public_ip="curl icanhazip.com"
 alias deps_install="composer install;npm install;bower install"
 alias deps_update="composer update;npm update;bower update"
 
+alias reverse="perl -e 'print reverse <>'"
+
 # use rlwrap if we have it
 telnet() {
     if command -v rlwrap 2>&1 1>/dev/null; then
