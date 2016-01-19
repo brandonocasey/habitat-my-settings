@@ -87,25 +87,45 @@ else
 fi
 
 
+function get_git_branch() {
+  # On branches, this will return the branch name
+  # On non-branches, (no branch)
+  ref="$(git symbolic-ref HEAD 2> /dev/null | sed -e 's/refs\/heads\///')"
+  if [ -n "$ref" ]; then
+    echo " [$ref]"
+  else
+    echo ""
+  fi
+}
+
+function get_smiley() {
+  if [ $? = 0 ]; then
+      echo "${LIGHT_BLUE}:)${RESET}"
+  else
+    echo "${RED}:(${RESET}"
+  fi
+}
+
 PS1=""
-# Smiley face
-PS1+="\`if [ \$? = 0 ]; then echo '$LIGHT_BLUE:)$RESET'; else echo '$RED:($RESET'; fi\`"
-PS1+="\[${WHITE}\]"             # Start the white color
-PS1+=" \T "                        # Time
-PS1+="\[${COLOR_THREE}\]"       # Start Color Three
-PS1+="\u"                          # User
-PS1+="\[${WHITE}\]"             # Start Color White
-PS1+="@"                           # Just an at symbol
-PS1+="\[${COLOR_FOUR}\]"        # Start Color 4
-PS1+="\h"                          # Current hostname
-PS1+="\[${WHITE}\]"             # Start Color White
-PS1+=":"                           # colon
-PS1+="\[${WHITE}\]"            # Start Color White
-PS1+="\w"                         # Full pwd (working directory)
-PS1+="\[${WHITE}\]"            # Start Color White
-PS1+="\[${RESET}\]"            # Reset Color
-PS1+="\n"                          # New Line
-PS1+="\[${COLOR_FIVE}\]"        # Color five
-PS1+="\$"                          # dollar character
-PS1+="\[${RESET}\]"             # Reset color
-PS1+=" "                           # space
+
+PS1+="\[\$(get_smiley)\]"     # Smiley face
+PS1+="\[${WHITE}\]"           # Start the white color
+PS1+=" \T "                   # Time
+PS1+="\[${COLOR_THREE}\]"     # Start Color Three
+PS1+="\u"                     # User
+PS1+="\[${WHITE}\]"           # Start Color White
+PS1+="@"                      # Just an at symbol
+PS1+="\[${COLOR_FOUR}\]"      # Start Color 4
+PS1+="\h"                     # Current hostname
+PS1+="\[${WHITE}\]"           # Start Color White
+PS1+=":"                      # colon
+PS1+="\[${WHITE}\]"           # Start Color White
+PS1+="\w"                     # Full pwd (working directory)
+PS1+="\[${COLOR_THREE}\]"     # Start Color White
+PS1+="\[\$(get_git_branch)\]" # current git branch or n/a
+PS1+="\[${RESET}\]"           # Reset Color
+PS1+="\n"                     # New Line
+PS1+="\[${COLOR_FIVE}\]"      # Color five
+PS1+="\$"                     # dollar character
+PS1+="\[${RESET}\]"           # Reset color
+PS1+=" "                      # space
