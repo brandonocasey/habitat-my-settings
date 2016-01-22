@@ -10,7 +10,7 @@ function habitat_brandonocasey_habitat_symlink_home_run() {
     if [ -d "$symlink_file_to_create" ]; then
       rm -rf "$symlink_file_to_create"
     fi
-    ln -s -f "$thing_to_link_to" "$symlink_file_to_create"
+    ln -s -f "$thing_to_link_to" "$symlink_file_to_create" 2>&1 > /dev/null
   done
 }
 
