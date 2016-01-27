@@ -1,1 +1,2 @@
 " When opening a new file with a code extension it will be started for you
+let g:templates_no_autocmd = 1
