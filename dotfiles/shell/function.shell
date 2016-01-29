@@ -334,7 +334,7 @@ nkill() {
         return 1
     fi
     echo 'Hit [Enter] to pkill, [Ctrl+C] to abort'
-    read && pkill -f "$@"
+    read && sudo pkill -9 -f "$@"
 }
 
 m_valgrind() {
