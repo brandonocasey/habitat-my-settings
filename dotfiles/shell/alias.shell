@@ -73,6 +73,7 @@ alias deps_install="composer install;npm install;bower install"
 alias deps_update="composer update;npm update;bower update"
 
 alias reverse="perl -e 'print reverse <>'"
+alias npmre="rm -rf ./node_modules && npm i"
 
 # use rlwrap if we have it
 telnet() {
