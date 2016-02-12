@@ -74,6 +74,7 @@ alias deps_update="composer update;npm update;bower update"
 
 alias reverse="perl -e 'print reverse <>'"
 alias npmre="rm -rf ./node_modules && npm i"
+alias maclock='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend'
 
 # use rlwrap if we have it
 telnet() {
