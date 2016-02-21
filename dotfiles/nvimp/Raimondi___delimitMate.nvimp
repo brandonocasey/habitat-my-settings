@@ -1,0 +1,7 @@
+" Auto complete (, ", ' with their partner and put you in the center of
+" them to type
+
+" Smart indenting for delimate
+" let g:delimitMate_expand_cr = 2
+let g:delimitMate_expand_space = 1
+" TODO: CONFIGURATION

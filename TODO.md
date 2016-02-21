@@ -10,6 +10,9 @@
 	* https://github.com/SirVer/ultisnips
 * only use osxkeychain on osx git config
 * create neovim plugin
+* add deps
+	* pip3 install neovim
+	* python3
 * update habitat to do full git repo
 * update habitat to have plugin hooks
 	* pre.habit
