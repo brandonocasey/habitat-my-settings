@@ -45,8 +45,8 @@ endif
 
 let VIM_BUNDLE_DIR=VIM_CONFIG_DIR . '/plugins'
 
-" Other Configuration
-call SourceFiles('/home/bcasey/.habitat/dotfiles', 'vimc')
+" Configuration
+call SourceFiles($habitat_base . '/dotfiles', 'vimc')
 
 " Plugins
 " TODO: use git over curl as we are forced to have it
@@ -60,7 +60,7 @@ if empty(glob(vim_plug_file))
   echo "vim-plug installation failed configuration is going to be messed up..."
 else
   call plug#begin(VIM_BUNDLE_DIR)
-  call AddPlugins('/home/bcasey/.habitat/dotfiles', 'nvimp')
+  call AddPlugins($habitat_base . '/dotfiles', 'nvimp')
   call plug#end()
-  call SourceFiles('/home/bcasey/.habitat/dotfiles', 'nvimp')
+  call SourceFiles($habitat_base . '/dotfiles', 'nvimp')
 endif

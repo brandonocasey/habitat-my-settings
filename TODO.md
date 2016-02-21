@@ -16,3 +16,4 @@
 	* main.habit
 	* post.habit
 	* etc!
+* update habitat with changes in this repo

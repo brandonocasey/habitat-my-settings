@@ -61,11 +61,13 @@ set whichwrap+=<,>,h,l
 set modelines=0
 
 " Reload instead of scrolling when more than 3 lines to be scrolled
-set ttyscroll=10
+if has('nvim') != 1
+	set ttyscroll=10
+endif
 
 " Use the new regex engine always
 if v:version > 740
-    set re=1
+	set re=1
 endif
 
 " Dont do syntax highlighting for big lines, makes vim slow, not slow enough
@@ -87,7 +89,7 @@ set ttyfast
 
 " Delete comment character when joining commented lines
 if v:version > 703 || v:version == 703 && has("patch541")
-      set formatoptions+=j
+	set formatoptions+=j
 endif
 
 " stop slowdowns in certain files due to fold method

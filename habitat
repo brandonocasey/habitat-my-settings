@@ -876,6 +876,7 @@ if ! habitat_verify_requirements; then
   return 1
 fi
 
+export habitat_base
 
 # Set trap so we dont exit our script
 trap '(habitat_trap_error ${LINENO})' ERR SIGTERM SIGINT SIGHUP SIGQUIT
