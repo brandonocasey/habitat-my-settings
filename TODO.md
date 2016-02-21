@@ -8,3 +8,11 @@
 	* https://github.com/airblade/vim-gitgutter
 	* https://github.com/Shougo/neocomplete.vim
 	* https://github.com/SirVer/ultisnips
+* only use osxkeychain on osx git config
+* create neovim plugin
+* update habitat to do full git repo
+* update habitat to have plugin hooks
+	* pre.habit
+	* main.habit
+	* post.habit
+	* etc!

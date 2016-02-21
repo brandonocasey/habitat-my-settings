@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+function habitat_brandonocasey_habitat_manage_vim2_run() {
+  local current_plugin_dir="$1"; shift
+  local dotfiles_dir="$1"; shift
+
+  local VIM_CONFIG="$HOME/.vimrc"
+  local NVIM_CONFIG="$HOME/.config/nvim/init.vim"
+  # cat "$current_plugin_dir"/main.vim > $VIM_CONFIG
+  cat "$current_plugin_dir"/main.vim > $NVIM_CONFIG
+  habitat_debug "Installing $VIM_CONFIG and $NVIM_CONFIG and updating plugins"
+  habitat_debug "symlinking $VIM_CONFIG to $NVIM_CONFIG for neovim"
+  (vim +PlugClean +PlugInstall +PlugUpdate +PlugUpgrade +qall 2>/dev/null 1>/dev/null &)
+}
+
+function habitat_brandonocasey_habitat_manage_vim2_options() {
+  local current_plugin_dir="$1"; shift
+  local dotfiles_dir="$1"; shift
+  echo 'brandonocasey/habitat-manage-vim does not support options'
+}

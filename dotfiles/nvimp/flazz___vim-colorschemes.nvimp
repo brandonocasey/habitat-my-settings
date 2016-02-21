@@ -1,0 +1,7 @@
+" Adds tons of colorschemes
+" Coloring + stop errors without plugin being installed
+let vim_colorschemes_readme=VIM_BUNDLE_DIR . '/vim-colorschemes/README.md'
+if filereadable(vim_colorschemes_readme)
+	colorscheme molokai
+	" hi Search cterm=NONE ctermfg=grey ctermbg=blue
+endif
