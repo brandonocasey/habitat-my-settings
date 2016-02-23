@@ -42,8 +42,6 @@ function! AddPlugins(path, search)
 endfunction
 
 
-\" Source in all vimc files
-call SourceFiles('$dotfiles_dir', '*.vimc')
 
 \" Use Vundle and source .vimp files
 let vundle_readme=expand('$vundle_dir/README.md')
@@ -67,6 +65,10 @@ if filereadable(vundle_readme)
   filetype plugin indent on
 
 endif
+
+\" Source in all vimc files
+call SourceFiles('$dotfiles_dir', '*.vimc')
+
 
 " > "$HOME/.vimrc"
   habitat_debug "Installing $HOME/.vimrc and updating plugins"
