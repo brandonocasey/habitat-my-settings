@@ -13,3 +13,13 @@ if &term =~ "xterm"
    let &t_Sb=nr2char(27).'[4%dm'
  endif
 endif
+
+" Coloring + stop errors without Vundle
+let vim_colorschemes=expand("~/.vim/bundle/vim-colorschemes/README.md")
+if filereadable(vim_colorschemes)
+	colorscheme molokai
+
+	" Make find/replace/confirm more readable"
+	" change visual highligth one shade lighter
+	autocmd ColorScheme * hi Visual ctermbg=236 guibg=#403D3D
+endif

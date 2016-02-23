@@ -10,8 +10,8 @@
 " how to do tab completion
 set complete=.,b,u,]
 
-" Start scrolling when we're 10 lines away from margins
-set scrolloff=10
+" Start scrolling when we're 15 lines away from margins
+set scrolloff=15
 
 " Turn on the WiLd menu
 set wildmenu

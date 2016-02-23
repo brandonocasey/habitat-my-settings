@@ -20,3 +20,6 @@
 	* post.habit
 	* etc!
 * update habitat with changes in this repo
+* do this http://stackoverflow.com/questions/5698284/in-my-vimrc-how-can-i-check-for-the-existence-of-a-color-scheme
+* differnt current search term highlight vim
+
