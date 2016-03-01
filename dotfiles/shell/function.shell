@@ -413,6 +413,7 @@ mi() {
     sudo make clean > /dev/null
     sudo rm -f Makefile.old
 }
+
 mit() {
     local perlcheck="$(find ./ -maxdepth 1 -iname 'Makefile.PL' | sed 's~^./~~' | head -n 1 )"
     if [ -n "$perlcheck" ]; then
@@ -426,6 +427,28 @@ mit() {
     sudo make clean > /dev/null
     sudo rm -f Makefile.old
 }
+
+git_rebase_on_history_change() {
+    if [ -z "$1" ] || [ -z "$2" ]; then
+        echo
+        echo "Usage git_rebase_on_history_change <parent> <child>"
+        echo
+    fi
+    local parent="$1"
+    local child="$2"
+    local save_branch="$RANDOM-$child-save-me"
+
+    git checkout "$child"
+    git checkout -b "$save_branch"
+    git checkout "$parent"
+    git branch -D "$child"
+    git checkout -b "$child"
+    git cherry-pick "$save_branch"
+    echo "run the following if cherry-pick worked:"
+    echo "git branch -D '$save_branch'"
+}
+
+
 
 
 complete -F _bin_completion bin_restart bin_start bin_status bin_stop
