@@ -13,6 +13,7 @@
 * add deps
 	* pip3 install neovim
 	* python3
+	* git-extras
 * update habitat to do full git repo
 * update habitat to have plugin hooks
 	* pre.habit
