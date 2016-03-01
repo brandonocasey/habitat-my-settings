@@ -76,12 +76,21 @@ alias reverse="perl -e 'print reverse <>'"
 alias npmre="rm -rf ./node_modules && npm i"
 alias maclock='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend'
 
+man() {
+    vim -c "if exists(':Man') | q! | else | cq! | endif"
+    if [ "$?" -eq 0 ]; then
+        vim -c "Man $1 $2" -c 'silent only'
+    else
+        "$(which man)" "$@"
+    fi
+}
+
 # use rlwrap if we have it
 telnet() {
     if command -v rlwrap 2>&1 1>/dev/null; then
         rlwrap telnet "$@"
     else
-        telnet "$@"
+        "$(which telnet)" "$@"
     fi
 }
 
@@ -90,7 +99,7 @@ tail() {
     if command -v multitail 2>&1 1>/dev/null; then
         multitail "$@"
     else
-        tail -f "$@"
+        "$(which tail)" -f "$@"
     fi
 }
 
