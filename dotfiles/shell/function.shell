@@ -433,6 +433,7 @@ git_rebase_on_history_change() {
         echo
         echo "Usage git_rebase_on_history_change <parent> <child>"
         echo
+        return 1
     fi
     local parent="$1"
     local child="$2"
