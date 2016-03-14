@@ -94,6 +94,24 @@ telnet() {
     fi
 }
 
+gitc() {
+    local repo="$1"; shift
+    if [ -n "$1" ]; then
+        repo="$repo/$1"; shift
+    fi
+    git clone https://github.com/"$repo"
+}
+
+gitr() {
+    local repo="$1"; shift
+    if [ -n "$1" ]; then
+        repo="$repo/$1"; shift
+    fi
+
+    git remote add upstream https://github.com/"$repo"
+}
+
+
 # use multitail if we have it
 tail() {
     if command -v multitail 2>&1 1>/dev/null; then
