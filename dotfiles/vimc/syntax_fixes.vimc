@@ -13,9 +13,13 @@ function! SetSyntax(binaryName)
         let binarySyntax="javascript"
 	elseif a:binaryName == "babel-node"
 		let binarySyntax="javascript"
-	elseif a:binaryName == "bash" || a:binaryName == "bats"
+	elseif a:binaryName == "bash"
 			let g:is_bash=1
 			let binarySyntax="sh"
+	elseif a:binaryName == "bats"
+			let g:is_bash=1
+			let binarySyntax="sh"
+			silent call SyntasticToggleMode()
 	endif
     execute "set filetype=" . binarySyntax
 endfunction
@@ -31,19 +35,20 @@ function! DetectSyntax()
         endif
     endif
     let binary = ""
-    let thing = matchlist(getline(nextnonblank(1)), '^#!.*/bin/\(env\s\+\)\?\(\w\+\)')
-    if !empty(thing)
-        let thing = reverse(thing)
-        let i = 0
-        while empty(binary) && i < len(thing)
-            if !empty(thing[i])
-                let binary = thing[i]
-            endif
-            let i = i + 1
-        endwhile
-    endif
-
-    call SetSyntax(binary)
+		let line = getline(nextnonblank(1))
+		let searches = ['\v^#!.*/bin/(env\s\+:?)?(\w+)', '<!DOCTYPE \(\w\+\)>']
+		let i = 0
+		while empty(binary) && i < len(searches)
+			let match = matchlist(line, searches[i])
+			if !empty(match)
+				let binary = match[1]
+			endif
+			let i = i + 1
+		endwhile
+		if empty(binary)
+			return
+		endif
+		call SetSyntax(binary)
 endfunction
 
 if has("autocmd")
@@ -57,7 +62,6 @@ if has("autocmd")
     autocmd BufRead,BufNewFile *.txt,*.tex set wrap linebreak nolist textwidth=0 wrapmargin=0
 
     autocmd BufNewFile,BufRead *.shell,*.sh,*.bats,*.bash call SetSyntax('bash')
-    autocmd BufNewFile,BufRead *.bats silent call SyntasticToggleMode()
     " cursorline/cursor column slow down ruby :(
     autocmd BufNewFile,BufRead *.vimc,*.vimp,*.nvimc,*.nvimp set syntax=vim
     autocmd BufNewFile,BufRead *.rb set syntax=ruby nocursorline nocursorcolumn
