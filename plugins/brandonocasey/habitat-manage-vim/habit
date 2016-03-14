@@ -73,7 +73,7 @@ call SourceFiles('$dotfiles_dir', '*.vimc')
 " > "$HOME/.vimrc"
   habitat_debug "Installing $HOME/.vimrc and updating plugins"
 
-  // update vim plugins automatically
+  # update vim plugins automatically
   $(vim +PluginClean! +PluginInstall +PluginUpdate +qall! >/dev/null 2>&1 &)
 }
 
