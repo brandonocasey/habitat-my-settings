@@ -14,13 +14,17 @@
 	* pip3 install neovim
 	* python3
 	* git-extras
-* update habitat to do full git repo
+* update habitat to use bpkg
 * update habitat to have plugin hooks
 	* pre.habit
 	* main.habit
 	* post.habit
+	* cmd.habit
 	* etc!
-* update habitat with changes in this repo
+* include time in debug output
+* use callbacks
+	* habitat_update_settings calls the next step in the process
+	* which has a callback to the next step, and so on
 * do this http://stackoverflow.com/questions/5698284/in-my-vimrc-how-can-i-check-for-the-existence-of-a-color-scheme
 * differnt current search term highlight vim
-* make vimman better
+* make vimman better (no vim flash before use)
