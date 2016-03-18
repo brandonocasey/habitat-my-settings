@@ -30,3 +30,4 @@
 * make vimman better (no vim flash before use)
 * add a fn to change CWD on login
 * add an alias to refer to $HOME/Projects
+* find the bash command that fixes the previous command, think it was a swear word
