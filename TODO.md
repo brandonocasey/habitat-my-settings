@@ -28,3 +28,5 @@
 * do this http://stackoverflow.com/questions/5698284/in-my-vimrc-how-can-i-check-for-the-existence-of-a-color-scheme
 * differnt current search term highlight vim
 * make vimman better (no vim flash before use)
+* add a fn to change CWD on login
+* add an alias to refer to $HOME/Projects
