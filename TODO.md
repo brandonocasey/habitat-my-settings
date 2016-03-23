@@ -31,3 +31,10 @@
 * add a fn to change CWD on login
 * add an alias to refer to $HOME/Projects
 * find the bash command that fixes the previous command, think it was a swear word
+* keybind
+	To delete a line without sticking it in the registers:
+	"_dd
+
+# New habitat
+* update_settings <cb> -> run "pre" <cb> -> run "main" <cb> -> run "post" <cb> -> cleanup <cb>
+
