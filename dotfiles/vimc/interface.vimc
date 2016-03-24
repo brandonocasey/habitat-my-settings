@@ -54,7 +54,9 @@ set tm=500
 
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent
-set whichwrap+=<,>,h,l
+
+" allow left, right, h, and l to go back and forward over newlines
+" set whichwrap+=<,>,[,],h,l
 
 " Never assume a file has mode lines, causes vim to freak out if the file
 " containes ex: command because vim thinks there is a command in the file
