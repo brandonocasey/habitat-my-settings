@@ -4,22 +4,33 @@ function habitat_brandonocasey_habitat_source_shell_completion_run() {
   local current_plugin_dir="$1"; shift
   local dotfiles_dir="$1"; shift
   local bash_completion="/etc/bash_completion"
-  if [ ! -f "/etc/bash_completion" ]; then
-    if [ -f "/usr/local/etc/bash_completion" ]; then
-      bash_completion="/usr/local${bash_completion}"
-    elif type -f brew 2>&1 >/dev/null && [ -f "$(brew --prefix)$bash_completion" ]; then
-      bash_completion="$(brew --prefix)$bash_completion"
-    else
-      habitat_error "Could not find a bash completion to source"
-      return
-    fi
-  fi
-
-  habitat_source_file "$bash_completion"
+  local bash_completion_two="/share/bash-completion/bash_completion"
 
   if type -f npm 2>&1 >/dev/null; then
     . <(npm completion)
   fi
+
+  if [ -f "$bash_completion_two" ]; then
+    habitat_source_file  "$bash_completion_two"
+    return
+  fi
+
+  if type -f brew 2>&1 >/dev/null && [ -f "$(brew --prefix)$bash_completion_two" ]; then
+    habitat_source_file  "$(brew --prefix)$bash_completion_two"
+    return
+  fi
+
+  if [ -f "$bash_completion" ]; then
+    habitat_source_file  "$bash_completion"
+    return
+  fi
+
+  if type -f brew 2>&1 >/dev/null && [ -f "$(brew --prefix)$bash_completion" ]; then
+    habitat_source_file  "$(brew --prefix)$bash_completion"
+    return
+  fi
+
+  habitat_error "Could not find a bash completion to source"
 }
 
 function habitat_brandonocasey_habitat_source_shell_completion_options() {
