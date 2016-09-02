@@ -25,6 +25,15 @@ big_files() {
     done <<< "$(find "$folder" -size +1M)" | sort -n
 }
 
+file_sizes() {
+    local dir="."
+    if [ -n "$1" ]; then
+        dir="$1"
+    fi
+
+    find "$dir" | xargs stat -f '%z %N' | sort -n
+}
+
 tar_folders() {
     GZIP=-9
     local folder="./*"
