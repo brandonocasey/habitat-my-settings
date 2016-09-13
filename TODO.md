@@ -34,6 +34,7 @@
 * keybind
 	To delete a line without sticking it in the registers:
 	"_dd
+* integrate with NVM
 
 # New habitat
 * update_settings <cb> -> run "pre" <cb> -> run "main" <cb> -> run "post" <cb> -> cleanup <cb>
